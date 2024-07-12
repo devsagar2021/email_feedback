@@ -10,10 +10,11 @@ let envVariables: Keys;
 
 if (process.env.NODE_ENV === 'production') {
   // We are in production - return the prod set of keys
-  envVariables = require('./prod');
+  envVariables = require('./prod').default;
 } else {
   // We are in development - return the dev keys
-  envVariables = require('./dev');
+  envVariables = require('./dev').default;
+  console.log('dev', envVariables);
 }
 
 export default envVariables;
