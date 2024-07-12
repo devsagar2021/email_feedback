@@ -1,0 +1,21 @@
+import { Express } from 'express';
+import passport from 'passport';
+
+const authRoutes = (app: Express) => {
+  app.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+  }));
+
+  app.get('/auth/google/callback', passport.authenticate('google'));
+
+  app.get('/api/logout', (req, res) => {
+    req.logout((err: any) => err);
+    res.send(req.user);
+  });
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user);
+  });
+};
+
+export default authRoutes;
