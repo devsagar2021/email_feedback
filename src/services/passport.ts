@@ -18,14 +18,13 @@ passport.deserializeUser(( id, done ) => {
     });
 });
 
-console.log('passport.use---', keys.googleClientID, keys.googleClientSecret);
-
 passport.use(
   new GoogleStrategy(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
+      proxy: true,
     },
     (_accessToken, _refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id })
@@ -36,7 +35,7 @@ passport.use(
             return;
           }
 
-          console.log('Creating new user:', profile);
+          console.log('--Creating new user--');
           new User({
             googleId: profile.id,
             displayName: profile.displayName,
