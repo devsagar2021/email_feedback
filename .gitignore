@@ -1,4 +1,7 @@
 node_modules
 src/config/dev.ts
 dist/
+
+
 NOTE.ts
+temp.js

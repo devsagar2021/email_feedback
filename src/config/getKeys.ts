@@ -4,6 +4,9 @@ type Keys = {
 	googleClientSecret: string
 	mongoURI: string
 	cookieKey: string,
+  payuMerchantKey: string,
+  payuActiveSalt: string,
+  clientHost: string
 }
 
 let envVariables: Keys;
@@ -14,7 +17,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // We are in development - return the dev keys
   envVariables = require('./dev').default;
-  console.log('dev', envVariables);
 }
 
 export default envVariables;

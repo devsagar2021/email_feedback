@@ -2,20 +2,18 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 import keys from "../config/getKeys";
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const User = mongoose.model('users');
+const User = mongoose.model("users");
 
-passport.serializeUser(( user, done ) => {
+passport.serializeUser((user, done) => {
   // @ts-ignore
   done(null, user.id);
 });
 
-passport.deserializeUser(( id, done ) => {
-  User.findById(id)
-    .then((user: typeof User) => {
-      done(null, user);
-    });
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
 
 passport.use(
@@ -26,26 +24,24 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
-    (_accessToken, _refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id })
-        .then((existingUser) => {
-          if (existingUser) {
-            console.log('User already exists');
-            done(null, existingUser);
-            return;
-          }
+    async (_accessToken, _refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        console.log("User already exists");
+        done(null, existingUser);
+        return;
+      }
 
-          console.log('--Creating new user--');
-          new User({
-            googleId: profile.id,
-            displayName: profile.displayName,
-            displayPicURL: profile.photos?.[0].value,
-          }).save()
-            .then((user: typeof User) => {
-              done(null, user)
-              console.log('--Profile created--');
-            });
-        });
+      console.log("--Creating new user--");
+      const user = await new User({
+        googleId: profile.id,
+        displayName: profile.displayName,
+        displayPicURL: profile.photos?.[0].value,
+        email: profile.emails?.[0].value,
+      }).save();
+
+      done(null, user);
+      console.log("--Profile created--");
     }
   )
 );
