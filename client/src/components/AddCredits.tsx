@@ -35,8 +35,8 @@ const AddCredits: React.FC = () => {
     }
   }
 
-  const serverHost = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : ''
-
+  const serverHost = import.meta.env.VITE_SERVER_HOST
+  
   return (
     <div>
       <h5>Add Credits</h5>
