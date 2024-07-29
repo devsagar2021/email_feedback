@@ -6,7 +6,9 @@ type Keys = {
 	cookieKey: string,
   payuMerchantKey: string,
   payuActiveSalt: string,
-  clientHost: string
+  clientHost: string,
+  mailersendToken: string,
+  redirectDomain: string,
 }
 
 let envVariables: Keys;

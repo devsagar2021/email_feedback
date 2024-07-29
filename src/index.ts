@@ -8,7 +8,9 @@ import keys from './config/getKeys';
 import billingRoutes from './routes/billingRoutes';
 import authRoutes from './routes/authRoutes';
 import './models/User';
+import './models/Surveys';
 import './services/passport';
+import surveyRoutes from './routes/surveyRoutes';
 
 mongoose.connect(keys.mongoURI);
 
@@ -34,6 +36,7 @@ app.use(passport.session());
 // routes
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 // Production: Serve client
 if (process.env.NODE_ENV === 'production') {
