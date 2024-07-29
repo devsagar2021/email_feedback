@@ -5,4 +5,6 @@ export default {
 	cookieKey: process.env.COOKIE_KEY,
 	payuMerchantKey: process.env.PAYU_MERCHANT_KEY,
 	payuActiveSalt: process.env.PAYU_ACTIVE_SALT,
+	mailersendToken: process.env.MAILERSEND_TOKEN,
+	redirectDomain: process.env.REDIRECT_DOMAIN,
 }

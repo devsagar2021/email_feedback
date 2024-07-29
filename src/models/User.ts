@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 export interface IUser {
+  _id?: Schema.Types.ObjectId;
   googleId: string;
   displayName: string;
   displayPicURL: string;
@@ -8,7 +9,6 @@ export interface IUser {
   credits: number;
 }
 
-const { Schema } = mongoose;
 const userSchema = new Schema<IUser>({
   googleId: String,
   displayName: String,
