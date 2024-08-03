@@ -12,8 +12,6 @@ interface InputProps {
 
 const Input: FC<InputProps> = ({ label, name, placeholder, className, rules, type = 'text', ...restProps }) => {
   const { register, formState: { errors } } = useFormContext();
-
-  console.log(errors[name]);
   return (
     <div className={`input-field ${className}`}>
       {label && <label htmlFor={name}>{label}</label>}

@@ -21,7 +21,6 @@ const SurveyNew = () => {
   const { handleSubmit } = methods;
 
   const processFormData = async (data: SurveyForm) => {
-    console.log(data);
     setSurveyFormData(data);
   };
 
@@ -29,6 +28,20 @@ const SurveyNew = () => {
     const res = await axios.post('/api/surveys', surveyFormData)
     dispatch(addCredits(res.data.credits));
     navigate('/surveys')
+  }
+
+  // eslint-disable-next-line no-useless-escape
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const validateEmails = (emails: string) => {
+    const invalidEmails = emails
+      .split(',')
+      .map(email => email.trim())
+      .filter(email => !emailRegex.test(email));
+
+    if (invalidEmails.length) {
+      return `These emails are invalid: ${invalidEmails.join(', ')}`;
+    }
+    return
   }
 
   return (
@@ -40,20 +53,27 @@ const SurveyNew = () => {
               <Input name='title' placeholder='Title' rules={{ required: true }} />
               <Input name='subject' placeholder='Subject' rules={{ required: true }} />
               <Input name='body' placeholder='Body' rules={{ required: true }} />
-              <Input name='recipients' placeholder='Recipients' rules={{ required: true }} />
-              <button className='btn' onClick={() => navigate('/surveys')}>Cancel</button>
-              <button type="submit" className='btn'>Next</button>
+              <Input name='recipients' placeholder='Recipients' rules={{ required: true, validate: validateEmails }} />
+              <div style={{ marginTop: '20px' }}>
+                <button className='red lighten-1 btn-flat white-text' onClick={() => navigate('/surveys')}>Cancel</button>
+                <button type="submit" className='btn right'>Next</button>
+              </div>
             </form>
           </FormProvider>
         )
       : (
           <div>
-            <h5>Please verify your entries</h5>
+            <h5>Please verify email details</h5>
             {Object.entries(surveyFormData).map(([key, value]) => (
-              <div key={key}>{key}: {value}</div>
+              <div key={key} style={{ marginTop: '10px' }}>
+                <div><b>{key}:</b></div>
+                <div>{value}</div>
+              </div>
             ))}
-            <button type="submit" className='btn' onClick={() => setSurveyFormData(undefined)}>Back</button>
-            <button type="submit" className='btn' onClick={sendSurvey}>Send Survey</button>
+            <div style={{ marginTop: '20px', width: '100%' }}>
+              <button className='amber darken-3 btn-flat white-text' onClick={() => setSurveyFormData(undefined)}>Back</button>
+              <button className='btn right' onClick={sendSurvey}>Send Survey</button>
+            </div>
           </div>
         )
     }
