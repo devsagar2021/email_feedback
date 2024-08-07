@@ -8,6 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src/**/*.ts", "src/services/emailTemplates"],
+  "include": ["src/**/*.ts", "src/services/emailTemplates", "src/temp.js"],
   "exclude": ["node_modules"]
 }

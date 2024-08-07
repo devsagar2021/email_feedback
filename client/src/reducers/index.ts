@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer';
+import auth from './auth';
+import surveys from './surveys';
 
 export default combineReducers({
-  auth: authReducer,
+  auth,
+  surveys
 });

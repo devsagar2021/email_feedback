@@ -10,7 +10,7 @@ import { useAppDispatch } from '../hooks/useTypedAppHooks';
 import AddCredits from './AddCredits';
 import Success from './Success';
 import Failure from './Failure';
-import SurveyNew from './SurveyNew';
+import SurveyNew from './surveys/SurveyNew';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();

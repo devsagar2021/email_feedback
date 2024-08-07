@@ -8,7 +8,11 @@ type Keys = {
   payuActiveSalt: string,
   clientHost: string,
   mailersendToken: string,
+  mailjetApiKey: string,
+  mailjetSecretKey: string,
   redirectDomain: string,
+  mailgunApiKey: string,
+  mailgunDomain: string,
 }
 
 let envVariables: Keys;
