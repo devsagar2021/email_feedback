@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from '../config/appAxios'
 import { ERROR, FETCH_USER, LOADING } from '../reducers/auth'
-import { AppThunk } from '../store'
+import { AppThunk } from '../config/store'
 
 export const fetchUser = (): AppThunk => async (dispatch) => {
 	dispatch({ type: LOADING })

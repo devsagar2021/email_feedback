@@ -1,0 +1,12 @@
+- ✅ Backend: Add tsc for building production build
+- 📌 Backend: Refactor server code to have class and separate service, controller and db logic.
+- ✅ UI: Create protected routes in UI
+- ✅ UI: Handle UI navigation to home if session expires.
+- UI: Improve survey list
+- UI & Backend: Logout enhancement (when session expires)
+
+- UI & Backend: Allow deleting the surveys.
+- UI & Backend: Allow users to specify the 'from' field on survey emails
+- UI: Allow client side sorting of surveys
+- UI & Backend: Allow surveys to be created in draft mode
+- UI: Change UI colors and theme

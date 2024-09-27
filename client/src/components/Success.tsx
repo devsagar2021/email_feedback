@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../config/appAxios'
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/useTypedAppHooks';
@@ -15,7 +15,6 @@ const Success = () => {
       try {
         const res = await axios.post('/api/add-credits', { txnid: params.get('txnid') });
         dispatch(addCredits(res.data.credits));
-        // redirect('/surveys');
         setTimeout(() => navigate('/surveys'), 1000);
       } catch (error) {
         console.error(error);

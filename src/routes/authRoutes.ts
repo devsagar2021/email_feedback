@@ -7,7 +7,7 @@ const authRoutes = (app: Express) => {
     scope: ['profile', 'email']
   }));
 
-  app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => { res.redirect('/surveys') });
+  app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => { res.redirect('/') });
 
   app.get('/api/logout', requireLogin, (req, res) => {
     req.logout((err: any) => err);

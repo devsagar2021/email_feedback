@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { RegisterOptions, useFormContext } from 'react-hook-form';
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
   placeholder?: string;

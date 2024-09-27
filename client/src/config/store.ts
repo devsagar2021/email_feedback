@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore, applyMiddleware, compose, Action } from 'redux'
 import { thunk, ThunkAction } from 'redux-thunk'
-import reducers from './reducers';
+import reducers from '../reducers';
 
 declare global {
   interface Window {
@@ -17,5 +17,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action>;
+export type AppStore = typeof store;
 
 export default store;

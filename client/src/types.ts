@@ -6,3 +6,10 @@ export type SurveyForm = {
   body: string;
   recipients: string;
 };
+
+export type PaymentForm = {
+  name: string;
+  email: string;
+  phone: string;
+  amt: string;
+};

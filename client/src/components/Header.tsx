@@ -1,13 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../hooks/useTypedAppHooks';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/useTypedAppHooks';
+import { fetchUser } from '../actions';
 
 const Header = () => {
-  const { loading, user } = useAppSelector((state) => state.auth);
+  const { loading, user, authenticated } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (authenticated) {
+      navigate('/surveys');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authenticated]);
 
   return (
     <nav className="nav-wrapper">
-      <Link to={user ? '/surveys' : '/'} className="left brand-logo">
+      <Link to={authenticated ? '/surveys' : '/'} className="left brand-logo">
         Email Feedback
       </Link>
       <ul id="nav-mobile" className="right">

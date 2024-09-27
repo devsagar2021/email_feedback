@@ -4,10 +4,7 @@ import { Provider } from 'react-redux'
 
 import App from './components/App'
 import { BrowserRouter } from 'react-router-dom'
-import store from './store'
-import axios from 'axios'
-// @ts-expect-error todo: temp, remove after testing
-window.axios = axios
+import store from './config/store'
 
 ReactDOM
   .createRoot(document.getElementById('root')!)
